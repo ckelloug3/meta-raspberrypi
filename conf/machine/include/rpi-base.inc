@@ -19,6 +19,7 @@ RPI_KERNEL_DEVICETREE_OVERLAYS ?= " \
     overlays/disable-bt.dtbo \
     overlays/dwc2.dtbo \
     overlays/gpio-key.dtbo \
+    overlays/gpio-poweroff.dtbo \
     overlays/hifiberry-amp.dtbo \
     overlays/hifiberry-dac.dtbo \
     overlays/hifiberry-dacplus.dtbo \
