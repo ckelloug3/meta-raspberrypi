@@ -30,6 +30,8 @@ GPIO_IR_TX ?= "17"
 
 CAN_OSCILLATOR ?= "16000000"
 
+ENABLE_UART ??= ""
+
 WM8960="${@bb.utils.contains("MACHINE_FEATURES", "wm8960", "1", "0", d)}"
 
 inherit deploy nopackages
@@ -174,9 +176,11 @@ do_deploy() {
     fi
 
     # UART support
-    if [ "${ENABLE_UART}" = "1" ]; then
+    if [ "${ENABLE_UART}" = "1" ] || [ "${ENABLE_UART}" = "0" ] ; then
         echo "# Enable UART" >>$CONFIG
-        echo "enable_uart=1" >>$CONFIG
+        echo "enable_uart=${ENABLE_UART}" >>$CONFIG
+    elif [ -n "${ENABLE_UART}" ]; then
+        bbfatal "Invalid value for ENABLE_UART [${ENABLE_UART}]. The value for ENABLE_UART can be 0 or 1."
     fi
 
     # Infrared support
